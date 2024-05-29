@@ -1,1 +1,129 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+
+body,
+html {
+    font-family: poppins;
+    font-size: 0.9rem;
+    background-color: #f3f4f6;
+}
+
+.header-wrapper{
+    @apply relative top-0 w-full h-20 z-40
+}
+
+.header-container {
+    @apply bg-white shadow-md p-2 h-20 fixed w-full items-center flex
+}
+
+input[type='text'], input[type='password'], input[type='email'], input[type='checkbox'] {
+    @apply bg-white rounded-md p-2 border border-black
+}
+
+input[type='text']:focus, input[type='password']:focus, input[type='email']:focus, input[type='checkbox']:focus, .btn-default:focus, .btn-default:hover {
+    box-shadow: 0 1px 14px #fcd34d;
+}
+
+input[type='text']:focus,
+input[type='password']:focus,
+input[type='email']:focus,
+input[type='checkbox']:focus {
+    @apply outline-none border border-amber-300
+}
+
+input:disabled, .p-disabled{
+    @apply bg-gray-200
+}
+
+.p-disabled{
+    @apply opacity-100
+}
+
+.btn-default {
+    @apply bg-gray-300 p-2 rounded-md border border-gray-300 duration-200 flex items-center
+}
+
+.btn-default i {
+    @apply mr-2
+}
+
+.btn-default:focus, .btn-default:hover {
+    @apply outline-none border border-amber-300
+}
+
+.btn-default:disabled, .btn-default:disabled:hover {
+    @apply outline-none border border-gray-300 shadow-none
+}
+
+.btn-default:disabled {
+    @apply opacity-40
+}
+
+.form-error {
+    @apply text-red-400
+}
+
+.heading {
+    @apply font-semibold text-lg uppercase
+}
+
+.main-wrapper{
+    @apply p-4
+}
+
+.heading-container{
+    @apply bg-white rounded-md shadow-md font-semibold border-2 border-amber-400 p-4 mb-4 flex justify-center items-center
+}
+
+.main-container{
+    @apply bg-white rounded-md shadow-md border-2 border-amber-400 overflow-auto fixed w-[98%] h-[70%] p-4
+}
+
+.p-dropdown-custom{
+    @apply border border-black w-full flex items-center h-[2.7rem]
+}
+
+.main-container form{
+    @apply flex flex-col
+}
+
+.main-container form > div > div{
+    @apply flex flex-col h-16
+}
+
+.main-container form div input:not(input[type='checkbox']){
+    @apply h-full w-full
+}
+
+.p-focus{
+    @apply border border-amber-300
+}
+
+.p-dropdown{
+    @apply border border-black
+}
+
+.p-focus.p-dropdown{
+    @apply border border-amber-300
+}
+
+.ag-theme-quartz{
+    @apply w-full h-[89%] absolute
+}
+
+.grid-action-button{
+    @apply bg-gray-200 rounded-md shadow-md p-2 h-8 w-8 flex justify-center items-center mt-1 duration-200 border-2 border-gray-200 hover:border-amber-300
+}
+
+.grid-action-button:not(:first-child){
+    @apply ml-4
+}
+
+.ag-root{
+    font-family: poppins;
+}
+
+

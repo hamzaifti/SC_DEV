@@ -1,0 +1,23 @@
+<div class="loginContainer">
+  <form [formGroup]="loginForm" class="loginDiv" (ngSubmit)="login()">
+    <span class="flex w-full items-center" style="flex-direction: row;">
+      <div class="heading ml-auto mr-auto w-full text-center" style="height: 100%;">Login</div>
+    </span>
+    <div>
+      <label>Email</label>
+      <div class="relative">
+        <input type="email" placeholder="Enter Email" style="padding-right: 2.5rem;" formControlName="email">
+        <i class="fa fa-envelope absolute top-o right-0 p-3"></i>
+      </div>
+    </div>
+    <div>
+      <label>Password</label>
+      <div class="relative">
+        <input type="password" placeholder="Enter Password" style="padding-right: 2.5rem;" formControlName="password" #passwordField>
+        <i (click)="togglePassVisibility()" class="fa fa-eye absolute top-0 right-0 cursor-pointer hover:opacity-80 duration-300 p-3" #passwordEye></i>
+      </div>
+    </div>
+    <span>Not Registered ? <span [routerLink]="['/register']" class="text-amber-400 underline font-semibold cursor-pointer hover:opacity-70 duration-300" tabindex="-1">Click here to register</span>  </span>
+    <button class="btn-default" type="submit">Login</button>
+  </form>
+</div>

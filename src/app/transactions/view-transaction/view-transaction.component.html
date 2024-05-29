@@ -1,0 +1,53 @@
+<p-dialog header="Print Configuration" [dismissableMask]="true" [modal]="true" [(visible)]="printModalVisible"
+	[style]="{width: '50vw'}">
+	<div class="font-semibold">
+		Select Date Range for Report
+	</div>
+
+	<div class="flex w-full mt-4">
+		<div class="flex flex-col">
+			<label>Start Date</label>
+			<p-calendar [(ngModel)]="printStartDate" appendTo="body"></p-calendar>
+		</div>
+
+		<div class="flex flex-col ml-4">
+			<label>End Date</label>
+			<p-calendar [(ngModel)]="printEndDate" appendTo="body"></p-calendar>
+		</div>
+
+		<div class="flex flex-col ml-8 justify-center">
+			<button (click)="invokePrint()" class="btn-default mt-6">Print</button>
+		</div>
+	</div>
+</p-dialog>
+<div class="main-wrapper">
+	<div class="heading-container">
+		<div>Transactions</div>
+		<div class="ml-auto flex">
+			<button (click)="openPrintDialog()" class="btn-default ml-auto">
+				Print Report</button>
+			<button [routerLink]="['/transaction','add-transaction']" class="btn-default ml-4">Add
+				Transcations</button>
+			<button class="btn-default ml-4" (click)="goBack()">Back</button>
+		</div>
+	</div>
+
+	<div class="main-container">
+		<div class="flex items-center">
+			<div class="relative mb-2 w-1/4">
+				<input [(ngModel)]="filterText" (keyup.enter)="searchTransaction()" type='text' placeholder="Search"
+					class="w-full" style="padding-right: 2rem;" />
+				<i (click)="searchTransaction()"
+					class="fa fa-search absolute top-1 right-0 cursor-pointer p-2 duration-200 hover:opacity-70"></i>
+			</div>
+			<div class="ml-2">
+				(Click on search icon or enter to search)
+			</div>
+		</div>
+		<ag-grid-angular style="height: 85%; width: 98%;" #grid class="ag-theme-quartz" (gridReady)="onGridReady($event)" [columnDefs]="columnDefs"
+			[components]="frameworkComponents" [rowModelType]="rowModelType"
+			[paginationPageSizeSelector]="paginationPageSizeSelector" [pagination]="true"
+			[paginationPageSize]="pagedRequestDto.pageSize">
+		</ag-grid-angular>
+	</div>
+</div>

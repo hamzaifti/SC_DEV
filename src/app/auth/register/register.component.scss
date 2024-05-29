@@ -1,0 +1,22 @@
+.registerContainer{
+    background-image: linear-gradient(0deg, rgba(55, 65, 81, 0.7), rgba(55, 65, 81, 0.7)), url('../../../assets/images/sc_back.png');
+}
+.registerContainer{
+    @apply w-full h-screen bg-no-repeat bg-center bg-cover grid overflow-auto
+}
+
+.registerDiv{
+    @apply bg-white rounded-md shadow-md w-1/3 h-auto ml-auto mr-auto mt-auto mb-auto flex flex-col p-8 justify-center items-center
+}
+
+.registerDiv div{
+    @apply flex flex-col w-full
+}
+
+.registerDiv div{
+    height: 4.35rem
+}
+
+.registerDiv > *{
+    @apply mt-4
+}

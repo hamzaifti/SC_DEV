@@ -1,0 +1,110 @@
+<div class="main-wrapper">
+    <div class="heading-container">
+        <div>Add Transaction</div>
+        <div class="ml-auto flex">
+            <button [routerLink]="['/transaction','view-transaction']" class="btn-default ml-auto">View
+                Transcations</button>
+            <button class="btn-default ml-4" (click)="goBack()">Back</button>
+        </div>
+
+    </div>
+    <div class="main-container">
+        <form class="h-full" #transactionForm="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
+            <div class="grid grid-cols-2 gap-8">
+                <div class="col-span-2 -mb-8">
+                    <div class="flex flex-col ml-auto">
+                        <label>Transaction Date</label>
+                        <p-calendar [disabled]="isEdit" [(ngModel)]="transaction.createdOn" name="createdOn"
+                            #createdOn="ngModel" appendTo="body"></p-calendar>
+                    </div>
+                </div>
+                <div>
+                    <label>Transaction Type *</label>
+                    <p-dropdown styleClass="p-dropdown-custom" appendTo="body" [options]="transactionTypeList"
+                        optionLabel="transactionType" optionValue="transactionValue" [showClear]="true"
+                        placeholder="Select" name="transactionType" [(ngModel)]="transaction.transactionType"
+                        (ngModelChange)="onChangeTransactionType()" #transactionType="ngModel" [required]="true"
+                        [disabled]="isEdit && userData.id != transaction.createdById && !isMasterUser"></p-dropdown>
+                    <div *ngIf="transactionType && transactionType.invalid && (transactionType.dirty || transactionType.touched)"
+                        class="error-message">
+                        <div *ngIf="transactionType.errors?.['required']" class="form-error">Transaction type is
+                            required.</div>
+                    </div>
+                </div>
+                <div *ngIf="transaction.transactionType != 4">
+                    <label>Office / Sector *</label>
+                    <p-dropdown appendTo="body" styleClass="p-dropdown-custom" [filter]="true" [options]="rolesList"
+                        [showClear]="true" placeholder="Select" name="role" [(ngModel)]="transaction.role"
+                        [required]="true" #role="ngModel"
+                        [disabled]="isEdit && userData.id != transaction.createdById && !isMasterUser"></p-dropdown>
+                    <div *ngIf="role && role.invalid && (role.dirty || role.touched)" class="error-message">
+                        <div *ngIf="role.errors?.['required']" class="form-error">Sector is
+                            required.</div>
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <label>Particular <span
+                            *ngIf="transaction.transactionType == 3 && iouReferenceObj?.iouId == '-1'">*</span> </label>
+                    <input type="text" name="Particular" [(ngModel)]="transaction.particular" #particular="ngModel"
+                        [disabled]="isEdit && userData.id != transaction.createdById && !isMasterUser"
+                        [required]="transaction.transactionType == 3 && iouReferenceObj?.iouId == '-1'" />
+                    <div *ngIf="particular && particular.invalid && (particular.dirty || particular.touched)"
+                        class="error-message">
+                        <div *ngIf="particular.errors?.['required']" class="form-error">Particular is
+                            required.</div>
+                    </div>
+                </div>
+                <div *ngIf="transaction.transactionType == 1">
+                    <label>Reciept No</label>
+                    <input type="text" name="recieptNo" [(ngModel)]="transaction.recieptNo"
+                        #recieptNo="ngModel" [disabled]="isEdit && userData.id != transaction.createdById && !isMasterUser" />
+
+                </div>
+                <div
+                    *ngIf="transaction.transactionType == 1 || transaction.transactionType == 3 || transaction.transactionType == 4">
+                    <label>
+                        <span *ngIf="transaction.transactionType != 4">Reciept</span>
+                        <span *ngIf="transaction.transactionType == 4">Deposit</span>
+                    </label>
+                    <input type="text" numericOnly name="reciept" [(ngModel)]="transaction.reciept" #reciept="ngModel"
+                        [disabled]="isEdit && userData.id != transaction.createdById && !isMasterUser" />
+                </div>
+                <div
+                    *ngIf="transaction.transactionType == 2 || transaction.transactionType == 3 || transaction.transactionType == 4">
+                    <label>
+                        <span *ngIf="transaction.transactionType != 4">Payment</span>
+                        <span *ngIf="transaction.transactionType == 4">Withdrawal</span>
+                    </label>
+                    <input type="text" numericOnly name="payment" [(ngModel)]="transaction.payment" #payment="ngModel"
+                        [disabled]="isEdit && userData.id != transaction.createdById && !isMasterUser" />
+                </div>
+
+                <div *ngIf="transaction.transactionType == 3" class="mb-2" [ngClass]="{'col-span-2': iouReferenceObj?.iouId != '-1'}">
+                    <label>
+                        IOU Reference *
+                    </label>
+                    <p-dropdown styleClass="p-dropdown-custom" appendTo="body" [showClear]="true"
+                        [options]="iouReferenceArr" [filter]="true" filterBy="iouName" [style]="{'width': '100%'}"
+                        [(ngModel)]="iouReferenceObj" (ngModelChange)="onIouReferenceSelection()" optionLabel="modifiedName" placeholder="Select Reference"
+                        name="iouReference" #iouReference="ngModel" [required]="true"
+                        [disabled]="isEdit && userData.id != transaction.createdById && !isMasterUser " />
+                    <div *ngIf="iouReference && iouReference.invalid && (iouReference.dirty || iouReference.touched)"
+                        class="error-message">
+                        <div *ngIf="iouReference.errors?.['required']" class="form-error">Reference is
+                            required.</div>
+                    </div>
+                </div>
+
+                <div class="mb-2" *ngIf="transaction.transactionType == 3 && iouReferenceObj?.iouId == '-1'">
+                    <label>
+                       IOU Reference Id
+                    </label>
+                    <input type="text" name="referenceId" [(ngModel)]="referenceId" disabled />
+                </div>
+
+            </div>
+            <button *ngIf="!isEdit || (isEdit &&  (userData.id == transaction.createdById || isMasterUser))" type="submit"
+                class="btn-default ml-auto mt-auto" [disabled]="!transactionForm.valid">Save</button>
+        </form>
+    </div>
+</div>
