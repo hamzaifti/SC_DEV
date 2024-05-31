@@ -36,7 +36,9 @@ export class ActionRendererComponent implements ICellRendererAngularComp {
 
   agInit(params: any): void {
     this.params = params;
-    this.showEdit = params.data.createdById == this.userData.id || environment.masterUserId.split(",").indexOf(this.userData.id) != -1;
+    //in case creater can also edit
+    // this.showEdit = params.data.createdById == this.userData.id || environment.masterUserId.split(",").indexOf(this.userData.id) != -1;
+    this.showEdit = environment.masterUserId.split(",").indexOf(this.userData.id) != -1;
   }
 
   refresh(params?: any): boolean {
