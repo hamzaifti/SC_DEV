@@ -14,7 +14,7 @@
                 <div class="col-span-2 -mb-8">
                     <div class="flex flex-col ml-auto">
                         <label>Transaction Date</label>
-                        <p-calendar [disabled]="isEdit" [(ngModel)]="transaction.createdOn" name="createdOn"
+                        <p-calendar [disabled]="isEdit" [(ngModel)]="transaction.createdOn" [minDate]="minDate" name="createdOn"
                             #createdOn="ngModel" appendTo="body"></p-calendar>
                     </div>
                 </div>

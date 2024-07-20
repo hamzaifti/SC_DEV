@@ -46,6 +46,8 @@ export class AddTransactionComponent {
 
   isMasterUser: boolean = false;
 
+  minDate: Date = new Date(0);
+
   constructor(private transactionService: TransactionService,
     private toastr: ToastrService,
     private userService: UserService,
@@ -57,7 +59,6 @@ export class AddTransactionComponent {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.isMasterUser);
     this.spinner.show();
     this.getUserData();
     this.getTransactionType();
@@ -106,6 +107,12 @@ export class AddTransactionComponent {
   getUserData(): void {
     this.userData = this.userService.getCurrentUserData();
     this.isMasterUser = environment.masterUserId.split(",").indexOf(this.userData.id) != -1;
+
+    if (!this.isMasterUser) {
+      this.minDate = new Date();
+      this.minDate.setDate(this.minDate.getDate() - 3);
+    }
+
   }
 
   getTransactionType(): void {
