@@ -3,7 +3,7 @@
 }
 
 .home-container{
-    @apply w-full h-screen bg-center bg-no-repeat bg-cover flex justify-center items-center absolute
+    @apply w-full h-screen bg-center bg-no-repeat bg-cover flex flex-col sm:flex-row justify-center items-center absolute
 }
 
 .home-container div{
@@ -11,5 +11,5 @@
 }
 
 .home-container div:not(:first-child){
-    @apply ml-4
+    @apply ml-0 sm:ml-4 mt-4 sm:mt-0
 }

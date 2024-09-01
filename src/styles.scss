@@ -4,6 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 
+
 body,
 html {
     font-family: poppins;
@@ -11,7 +12,7 @@ html {
     background-color: #f3f4f6;
 }
 
-.header-wrapper{
+.header-wrapper {
     @apply relative top-0 w-full h-20 z-40
 }
 
@@ -34,11 +35,11 @@ input[type='checkbox']:focus {
     @apply outline-none border border-amber-300
 }
 
-input:disabled, .p-disabled{
+input:disabled, .p-disabled {
     @apply bg-gray-200
 }
 
-.p-disabled{
+.p-disabled {
     @apply opacity-100
 }
 
@@ -70,59 +71,87 @@ input:disabled, .p-disabled{
     @apply font-semibold text-lg uppercase
 }
 
-.main-wrapper{
+.main-wrapper {
     @apply p-4
 }
 
-.heading-container{
+.heading-container {
     @apply bg-white rounded-md shadow-md font-semibold border-2 border-amber-400 p-4 mb-4 flex justify-center items-center
 }
 
-.main-container{
-    @apply bg-white rounded-md shadow-md border-2 border-amber-400 overflow-auto fixed w-[98%] h-[70%] p-4 
+.main-container {
+    @apply bg-white rounded-md shadow-md border-2 border-amber-400 overflow-auto fixed w-[98%] h-[70%] p-4
 }
 
-.p-dropdown-custom{
+.p-dropdown-custom {
     @apply border border-black w-full flex items-center h-[2.7rem]
 }
 
-.main-container form{
+.main-container form {
     @apply flex flex-col
 }
 
-.main-container form > div > div{
+.main-container form>div>div {
     @apply flex flex-col h-16
 }
 
-.main-container form div input:not(input[type='checkbox']){
+.main-container form div input:not(input[type='checkbox']) {
     @apply h-full w-full
 }
 
-.p-focus{
+.p-focus {
     @apply border border-amber-300
 }
 
-.p-dropdown{
+.p-dropdown {
     @apply border border-black
 }
 
-.p-focus.p-dropdown{
+.p-focus.p-dropdown {
     @apply border border-amber-300
 }
 
-.ag-theme-quartz{
+.ag-theme-quartz {
     @apply w-full h-[89%] absolute
 }
 
-.grid-action-button{
+.grid-action-button {
     @apply bg-gray-200 rounded-md shadow-md p-2 h-8 w-8 flex justify-center items-center mt-1 duration-200 border-2 border-gray-200 hover:border-amber-300
 }
 
-.grid-action-button:not(:first-child){
+.grid-action-button:not(:first-child) {
     @apply ml-4
 }
 
-.ag-root{
+.ag-root {
     font-family: poppins;
 }
 
+
+@media screen and (max-width: 780px) {
+    .heading-container{
+        zoom: 0.5;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }   
+    .main-container{
+        zoom: 0.5;
+        width: 96%;
+        left: 50%;
+        transform: translate(-50%);
+    }
+    
+    .p-dropdown-panel{
+        transform: scale(0.5);
+        transform-origin: 0 0;
+        margin-top: -1rem;
+    }
+}
+
+
+@media screen and (max-width: 780px) {
+    .main-container{
+        width: 91%;
+    }
+}
