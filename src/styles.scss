@@ -79,7 +79,7 @@ input:disabled, .p-disabled{
 }
 
 .main-container{
-    @apply bg-white rounded-md shadow-md border-2 border-amber-400 overflow-auto fixed w-[98%] h-[70%] p-4
+    @apply bg-white rounded-md shadow-md border-2 border-amber-400 overflow-auto fixed w-[98%] h-[70%] p-4 
 }
 
 .p-dropdown-custom{
@@ -125,5 +125,4 @@ input:disabled, .p-disabled{
 .ag-root{
     font-family: poppins;
 }
-
 

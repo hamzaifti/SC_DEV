@@ -10,7 +10,7 @@ import { TransactionService } from 'src/app/service/transaction.service';
 import { UserService } from 'src/app/service/user.service';
 import { TransactionTypeEnum, mapTransactionType } from "../../enums/TransactionTypeEnum";
 import { ColDef, GridReadyEvent, IServerSideDatasource } from "node_modules/ag-grid-community";
-import { RowModelType } from 'ag-grid-community';
+import { RowModelType, DomLayoutType } from 'ag-grid-community';
 import { PagedResponseDto } from 'src/app/interface/PagedResponseDto';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { TransactionType } from 'src/app/interface/transactionType';
@@ -19,7 +19,6 @@ import { IdentityRoles } from 'src/app/interface/IdentityRoles';
 import { RolesEnum } from '../../enums/RolesEnum';
 import { AgGridAngular } from 'ag-grid-angular';
 import { CashSummaryReportDto } from 'src/app/interface/CashSummaryReportDto';
-import { CashSummaryDto } from 'src/app/interface/CashSummaryDto';
 import { PendingReferenceDto } from 'src/app/interface/PendingReferenceDto';
 @Component({
   selector: 'app-view-transaction',
@@ -29,11 +28,12 @@ import { PendingReferenceDto } from 'src/app/interface/PendingReferenceDto';
 export class ViewTransactionComponent {
 
   @ViewChild('grid') grid!: AgGridAngular;
+  domLayout: DomLayoutType = "normal";
   userData: UserDto = new UserDto();
   pagedRequestDto: PagedRequestDto = new PagedRequestDto();
   transactionListPaged: Transaction[] = [];
   frameworkComponents: any;
-  paginationPageSizeSelector: number[] = [10];
+  paginationPageSizeSelector: number[] = [50,100,150,200];
   rowModelType: RowModelType = "serverSide";
   printEndDate: Date = new Date();
   printStartDate: Date = new Date(new Date().setDate(this.printEndDate.getDate() - 1));
@@ -48,15 +48,15 @@ export class ViewTransactionComponent {
   closingBalance: number = 0;
 
   columnDefs: ColDef[] = [
-    { headerName: 'Transaction Type', field: 'transactionType' },
-    { headerName: 'Sector', field: 'role' },
+    { headerName: 'Transaction Type', field: 'transactionType', minWidth: 200 },
+    { headerName: 'Sector', field: 'role', minWidth: 200 },
     { headerName: 'Particulars', field: 'particular', minWidth: 400 },
-    { headerName: 'Reciept No', field: 'recieptNo' },
-    { headerName: 'Reciept / Deposit', field: 'reciept' },
-    { headerName: 'Payment / Withdrawal', field: 'payment' },
-    { headerName: 'Created By', field: 'createdByName' },
-    { headerName: 'Created On', field: 'createdOn' },
-    { headerName: 'Action', cellRenderer: 'actionCellRenderer' }
+    { headerName: 'Reciept No', field: 'recieptNo', minWidth: 200 },
+    { headerName: 'Reciept / Deposit', field: 'reciept', minWidth: 200 },
+    { headerName: 'Payment / Withdrawal', field: 'payment', minWidth: 200 },
+    { headerName: 'Created By', field: 'createdByName', minWidth: 200 },
+    { headerName: 'Created On', field: 'createdOn', minWidth: 250 },
+    { headerName: 'Action', cellRenderer: 'actionCellRenderer', minWidth: 200 }
   ];
 
   constructor(private userService: UserService,
@@ -66,7 +66,7 @@ export class ViewTransactionComponent {
     private rolesService: RolesService,
     private spinner: NgxSpinnerService
   ) {
-    this.pagedRequestDto.pageSize = 10;
+    this.pagedRequestDto.pageSize = 50;
     this.frameworkComponents = {
       actionCellRenderer: ActionRendererComponent,
     };
@@ -79,6 +79,7 @@ export class ViewTransactionComponent {
   onGridReady(params: GridReadyEvent<Transaction>) {
     var ds = this.gridDataSource();
     params.api.setGridOption('serverSideDatasource', ds); // replace dataSource with your datasource
+    params.api.sizeColumnsToFit();
   }
 
 

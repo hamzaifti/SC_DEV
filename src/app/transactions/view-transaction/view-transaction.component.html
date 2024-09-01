@@ -32,8 +32,8 @@
 		</div>
 	</div>
 
-	<div class="main-container">
-		<div class="flex items-center">
+	<div class="main-container" style="display: flex; flex-direction: column;">
+		<div class="flex" style="align-items: center;">
 			<div class="relative mb-2 w-1/4">
 				<input [(ngModel)]="filterText" (keyup.enter)="searchTransaction()" type='text' placeholder="Search"
 					class="w-full" style="padding-right: 2rem;" />
@@ -44,10 +44,12 @@
 				(Click on search icon or enter to search)
 			</div>
 		</div>
-		<ag-grid-angular style="height: 85%; width: 98%;" #grid class="ag-theme-quartz" (gridReady)="onGridReady($event)" [columnDefs]="columnDefs"
-			[components]="frameworkComponents" [rowModelType]="rowModelType"
-			[paginationPageSizeSelector]="paginationPageSizeSelector" [pagination]="true"
-			[paginationPageSize]="pagedRequestDto.pageSize">
-		</ag-grid-angular>
+		<div style="height: 100%; width: 100%; position: relative;">
+			<ag-grid-angular style="height: 100%;margin-bottom: 2rem;" #grid class="ag-theme-quartz"
+				(gridReady)="onGridReady($event)" [domLayout]="domLayout" [columnDefs]="columnDefs" [components]="frameworkComponents"
+				[rowModelType]="rowModelType" [paginationPageSizeSelector]="paginationPageSizeSelector"
+				[pagination]="true" [paginationPageSize]="pagedRequestDto.pageSize">
+			</ag-grid-angular>
+		</div>
 	</div>
 </div>
